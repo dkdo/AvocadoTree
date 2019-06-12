@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import CharacterAdd from "../character-add/CharacterAdd";
-import { getCharacters } from "../../redux/selectors";
+import React from 'react';
+import { connect } from 'react-redux';
+import CharacterAdd from '../character-add/CharacterAdd';
+import { getCharacters } from '../../redux/selectors';
 
 const CharacterList = ({characters}) => (
   <div>

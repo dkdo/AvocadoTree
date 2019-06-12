@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import CharacterList from "./components/character-list/CharacterList";
+import CharacterList from './components/character-list/CharacterList';
 import { Route, Switch } from 'react-router-dom';
-import Header from "./components/Header/Header";
-import Home from "./components/home/Home";
+import Header from './components/header/Header';
+import Home from './components/home/Home';
 
 function App() {
   return (

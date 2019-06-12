@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { ADD_CHARACTER } from "../../redux/actionTypes";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { ADD_CHARACTER } from '../../redux/actionTypes';
 
 function CharacterAdd() {
   const [name, setName] = useState("");
@@ -11,7 +11,7 @@ function CharacterAdd() {
   const dispatch = useDispatch();
   const submitCharacter = (e) => {
     e.preventDefault();
-    dispatch({ type: ADD_CHARACTER, payload: {content: name }});
+    dispatch({ type: ADD_CHARACTER, payload: { content: name }});
     setName("");
     setHitPoints(null);
     setArmorClass(null);
@@ -40,7 +40,7 @@ function CharacterAdd() {
       <input type="number" placeholder="Hit Points" value={hitPoints || ""} onChange={handleHitPointsChange}/>
       <input type="number" placeholder="AC" value={armorClass || ""} onChange={handleArmorClassChange}/>
       <input type="number" placeholder="Initiative" value={initiative || ""} onChange={handleInitiativeChange}/>
-      <button type="submit" value="Submit" onClick={submitCharacter}/>
+      <input type="submit" value="Submit" onClick={submitCharacter}/>
     </form>
   );
 }

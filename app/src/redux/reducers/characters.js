@@ -1,4 +1,4 @@
-import { ADD_CHARACTER } from "../actionTypes";
+import { ADD_CHARACTER } from '../actionTypes';
 
 let characterId = 0;
 
