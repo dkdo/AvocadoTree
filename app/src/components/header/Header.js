@@ -1,18 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import './Header.css';
 
 const Header = () => {
   const activeStyle = { color: "#F15B2A" };
   return (
-    <nav>
-      <NavLink to="/" activeStyle={activeStyle} exact>
-        Home
-      </NavLink>
-      {" | "}
-      <NavLink to="/list" activeStyle={activeStyle}>
-        Character List
-      </NavLink>
-    </nav>
+    <AppBar position="static" color="primary-light">
+      <Toolbar>
+        <nav>
+          <NavLink to="/" exact>
+            <span className="logo"/>
+          </NavLink>
+          <NavLink to="/list" activeStyle={activeStyle}>
+            Character List
+          </NavLink>
+        </nav>
+      </Toolbar>
+    </AppBar>
   );
 };
 

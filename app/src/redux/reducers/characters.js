@@ -11,14 +11,14 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_CHARACTER: {
       const id = ++characterId;
-      const { content } = action.payload;
+      const { name, hitPoints, armorClass, initiative, speed } = action.payload;
       return {
         ...state,
         allIds: [...state.allIds, id],
         byIds: {
           ...state.byIds,
           [id]: {
-            content
+            name, hitPoints, armorClass, initiative, speed
           }
         }
       };

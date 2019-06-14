@@ -1,0 +1,37 @@
+nav {
+  align-self: center;
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+  margin-left: 20px;
+}
+
+nav > a {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+nav > a:first-child {
+  float: left;
+}
+
+a {
+  color: rgba(0, 0, 0, .54);
+  fill: rgba(0, 0, 0, .54);
+  text-decoration: none;
+  text-align: right;
+  font-weight: 500;
+}
+
+a + a {
+  padding-left: 10px;
+}
+
+.logo {
+  background-image: url("../../logo.png");
+  display: block;
+  float: left;
+  height: 32px;
+  width: 32px;
+  background-size: 32px 32px;
+}
