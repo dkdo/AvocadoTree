@@ -1,12 +1,15 @@
-import { SET_CHARACTER_ORDER } from "../actionTypes";
+import { START_REORDER } from "../actions/actionTypes";
 import { CHARACTER_ORDER } from "../../shared/constants";
 
 const initialState = CHARACTER_ORDER.INITIATIVE;
 
 const characterOrder = (state = initialState, action) => {
   switch (action.type) {
-    case SET_CHARACTER_ORDER: {
-      return action.payload.order;
+    case START_REORDER: {
+      return {
+        ...state,
+        reordering: true
+      }
     }
     default: {
       return state;

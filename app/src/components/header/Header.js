@@ -13,8 +13,8 @@ const Header = () => {
           <NavLink to="/" exact>
             <span className="logo"/>
           </NavLink>
-          <NavLink to="/list" activeStyle={activeStyle}>
-            Character List
+          <NavLink to="/battle" activeStyle={activeStyle}>
+            Battle
           </NavLink>
         </nav>
       </Toolbar>

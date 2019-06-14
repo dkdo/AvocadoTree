@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CharacterList from './components/battle/Battle';
+import Battle from './components/battle/Battle';
 import { Route, Switch } from 'react-router-dom';
 import Header from './components/header/Header';
 import Home from './components/home/Home';
@@ -25,7 +25,7 @@ function App() {
         <Container className="main-container">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/list" component={CharacterList} />
+            <Route exact path="/battle" component={Battle} />
           </Switch>
         </Container>
       </div>

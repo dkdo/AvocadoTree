@@ -1,4 +1,4 @@
-import { CHARACTER_ORDER } from "../shared/constants";
+import { CHARACTER_ORDER } from "../../shared/constants";
 
 export const getCharactersState = store => store.characters;
 
@@ -11,11 +11,14 @@ export const getCharacters = (store, characterOrder) => {
   const allCharacters = getCharacterList(store).map(id => getCharacterById(store, id));
   switch (characterOrder) {
     case CHARACTER_ORDER.INITIATIVE:
-      return allCharacters.sort((a, b) => a.initiative - b.initiative);
+      return allCharacters.sort((a, b) => b.initiative - a.initiative);
     default:
       return allCharacters;
   }
 };
 
-export const getCharacterNames = (store) =>
+export const getCharacterNames = store =>
   getCharacterList(store).map(id => getCharacterById(store, id).name);
+
+export const getReorderingStatus = store =>
+  store.characterOrder.reordering;
