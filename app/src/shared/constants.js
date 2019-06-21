@@ -1,3 +1,4 @@
 export const CHARACTER_ORDER = {
-  INITIATIVE: "initiative"
+  INITIATIVE: "initiative",
+  CUSTOM: "custom"
 };

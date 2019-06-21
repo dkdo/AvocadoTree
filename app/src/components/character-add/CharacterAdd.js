@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import './CharacterAdd.css';
-import { getCharacterNames, getReorderingStatus } from "../../redux/selectors/selectors";
+import { getCharacterNames } from "../../redux/selectors/selectors";
 import { addCharacter } from "../../redux/actions/actions";
 
 const CharacterAdd = () => {
@@ -13,7 +13,6 @@ const CharacterAdd = () => {
   const [initiative, setInitiative] = useState(null);
   const [speed, setSpeed] = useState(null);
   const characterNames = useSelector(getCharacterNames);
-  const reordering = useSelector(getReorderingStatus);
 
   const dispatch = useDispatch();
   const submitCharacter = (e) => {
@@ -52,7 +51,7 @@ const CharacterAdd = () => {
 
   return (
     <form className="character-add">
-      <fieldset disabled={reordering}>
+      <fieldset>
         <Input type="text" placeholder="Name" value={name} onChange={handleNameChange}/>
         <Input type="number" placeholder="Hit Points" value={hitPoints || ""} onChange={handleHitPointsChange}/>
         <Input type="number" placeholder="AC" value={armorClass || ""} onChange={handleArmorClassChange}/>

@@ -3,10 +3,10 @@ import CharacterAdd from '../character-add/CharacterAdd';
 import Grid from "@material-ui/core/Grid";
 import CharacterList from "../character-list/CharacterList";
 import Button from "@material-ui/core/Button";
-import { startReorder } from "../../redux/actions/actions";
+import { startReorder, stopReorder } from "../../redux/actions/actions";
 import connect from "react-redux/es/connect/connect";
 
-const Battle = ({ startReorder }) => (
+const Battle = ({ reordering, startReorder, stopReorder }) => (
   <div>
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -17,14 +17,21 @@ const Battle = ({ startReorder }) => (
       </Grid>
       <Grid item xs={12}>
         <Button variant="contained" color="primary">Start</Button>
-        <Button variant="contained" color="primary" onClick={startReorder}>Reorder</Button>
+        <Button variant="contained" color="primary" onClick={reordering ? stopReorder : startReorder}>
+          {reordering ? 'Stop Reorder' : 'Reorder'}
+        </Button>
       </Grid>
     </Grid>
   </div>
 );
 
-const mapDispatchToProps = {
-  startReorder
+const mapStateToProps = state => {
+  return { reordering: state.characterOrder.reordering };
 };
 
-export default connect(null, mapDispatchToProps)(Battle);
+const mapDispatchToProps = {
+  startReorder,
+  stopReorder
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Battle);

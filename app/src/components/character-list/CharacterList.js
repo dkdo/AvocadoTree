@@ -12,47 +12,65 @@ import KeyboardArrowDown from "@material-ui/icons/KeyboardArrowDown";
 import './CharacterList.css';
 import { orderDown, orderUp } from "../../redux/actions/actions";
 
-const CharacterList = ({ characters, reordering }) => (
-  <Paper>
-    <Table>
-      <TableHead>
-        <TableRow>
-          {reordering &&
-            <TableCell align="right" className="order-col"> </TableCell>
-          }
-          <TableCell>Name</TableCell>
-          <TableCell align="right">Hit Points</TableCell>
-          <TableCell align="right">Armor Class</TableCell>
-          <TableCell align="right">Initiative</TableCell>
-          <TableCell align="right">Speed</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {characters.map(character => (
-          <TableRow key={character.name}>
+const CharacterList = ({ characters, reordering, orderUp, orderDown }) => {
+  function isFirst(character) {
+    return character === characters[0];
+  }
+
+  function isLast(character) {
+   return character === characters[characters.length - 1];
+  }
+
+  function handleOrderUp(character) {
+    if (!isFirst(character))
+      orderUp(character.id);
+  }
+
+  function handleOrderDown(character) {
+    if (!isLast(character))
+      orderDown(character.id);
+  }
+
+  return (
+    <Paper>
+      <Table>
+        <TableHead>
+          <TableRow>
             {reordering &&
-              <TableCell align="right">
-                <KeyboardArrowUp />
-                <KeyboardArrowDown />
-              </TableCell>
+            <TableCell align="right" className="order-col"> </TableCell>
             }
-            <TableCell component="th" scope="row">{character.name}</TableCell>
-            <TableCell align="right">{character.hitPoints}</TableCell>
-            <TableCell align="right">{character.armorClass}</TableCell>
-            <TableCell align="right">{character.initiative}</TableCell>
-            <TableCell align="right">{character.speed}</TableCell>
+            <TableCell>Name</TableCell>
+            <TableCell align="right">Hit Points</TableCell>
+            <TableCell align="right">Armor Class</TableCell>
+            <TableCell align="right">Initiative</TableCell>
+            <TableCell align="right">Speed</TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </Paper>
-);
+        </TableHead>
+        <TableBody>
+          {characters.map((character) => (
+            <TableRow key={character.name}>
+              {reordering &&
+              <TableCell align="right">
+                <KeyboardArrowUp color={isFirst(character) ? 'disabled' : ''} onClick={() => handleOrderUp(character)}/>
+                <KeyboardArrowDown color={isLast(character) ? 'disabled' : ''} onClick={() => handleOrderDown(character)}/>
+              </TableCell>
+              }
+              <TableCell component="th" scope="row">{character.name}</TableCell>
+              <TableCell align="right">{character.hitPoints}</TableCell>
+              <TableCell align="right">{character.armorClass}</TableCell>
+              <TableCell align="right">{character.initiative}</TableCell>
+              <TableCell align="right">{character.speed}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
+  );
+};
 
 const mapStateToProps = state => {
   const { characterOrder } = state;
-  const characters = getCharacters(state, characterOrder);
-  console.log('get characters');
-  console.log(characters);
+  const characters = getCharacters(state);
   return { characters, reordering: characterOrder.reordering };
 };
 
