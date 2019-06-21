@@ -1,6 +1,9 @@
 export const ADD_CHARACTER = "ADD_CHARACTER";
+export const ADD_CHARACTER_CUSTOM_ORDER = "ADD_CHARACTER_CUSTOM";
 export const SET_CHARACTER_ORDER = "SET_CHARACTER_ORDER";
+export const START_BATTLE = "START_BATTLE";
 export const START_REORDER = "START_REORDER";
+export const STOP_BATTLE = "STOP_BATTLE";
 export const STOP_REORDER = "STOP_REORDER";
 export const ORDER_UP = "ORDER_UP";
 export const ORDER_DOWN = "ORDER_DOWN";

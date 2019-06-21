@@ -4,7 +4,8 @@ import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 import './CharacterAdd.css';
 import { getCharacterNames } from "../../redux/selectors/selectors";
-import { addCharacter } from "../../redux/actions/actions";
+import { addCharacter, addCharacterReorder } from "../../redux/actions/actions";
+import { CHARACTER_ORDER } from "../../shared/constants";
 
 const CharacterAdd = () => {
   const [name, setName] = useState("");
@@ -13,17 +14,26 @@ const CharacterAdd = () => {
   const [initiative, setInitiative] = useState(null);
   const [speed, setSpeed] = useState(null);
   const characterNames = useSelector(getCharacterNames);
+  const characterOrder = useSelector(state => state.characterOrder.order);
 
   const dispatch = useDispatch();
   const submitCharacter = (e) => {
     e.preventDefault();
-    dispatch(addCharacter({name, hitPoints, armorClass, initiative, speed}));
+    if (characterOrder === CHARACTER_ORDER.INITIATIVE) {
+      dispatch(addCharacter({ name, hitPoints, armorClass, initiative, speed }));
+    } else {
+      dispatch(addCharacterReorder({ name, hitPoints, armorClass, initiative, speed }))
+    }
+    resetFields();
+  };
+
+  function resetFields() {
     setName("");
     setHitPoints(null);
     setArmorClass(null);
     setInitiative(null);
     setSpeed(null);
-  };
+  }
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -46,7 +56,8 @@ const CharacterAdd = () => {
   }
 
   function isCharacterValid() {
-    return name !== "" && !characterNames.includes(name) && hitPoints !== null && armorClass !== null && initiative !== null && speed !== null;
+    return name !== "" && !characterNames.includes(name) && hitPoints !== null && armorClass !== null
+      && initiative !== null && speed !== null;
   }
 
   return (

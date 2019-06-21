@@ -1,4 +1,4 @@
-import { ADD_CHARACTER, ORDER_DOWN, ORDER_UP } from '../actions/actionTypes';
+import { ADD_CHARACTER, ADD_CHARACTER_CUSTOM_ORDER, ORDER_DOWN, ORDER_UP } from '../actions/actionTypes';
 
 const initialState = {
   orderedIds: [],
@@ -13,17 +13,31 @@ export default function (state = initialState, action) {
       let characters = [];
       let order = [];
 
-      if (state.orderedIds && state.orderedIds.length > 0) {
-        characters = state.orderedIds.map(id =>
-          ({ id, initiative: state.byIds[id].initiative })
-        );
-        characters.push({ id, initiative });
-        characters.sort((a, b) => b.initiative - a.initiative);
+      characters = state.orderedIds.map(id =>
+        ({ id, initiative: state.byIds[id].initiative })
+      );
+      characters.push({ id, initiative });
+      characters.sort((a, b) => b.initiative - a.initiative);
 
-        order = characters.map(character => character.id);
-      } else {
-        order = [...state.orderedIds, id];
-      }
+      order = characters.map(character => character.id);
+
+      return {
+        ...state,
+        orderedIds: order,
+        byIds: {
+          ...state.byIds,
+          [id]: {
+            name, hitPoints, armorClass, initiative, speed
+          }
+        }
+      };
+    }
+    case ADD_CHARACTER_CUSTOM_ORDER: {
+      const { id, name, hitPoints, armorClass, initiative, speed } = action.payload;
+
+      let order = [];
+
+      order = [...state.orderedIds, id];
 
       return {
         ...state,
